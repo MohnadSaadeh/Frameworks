@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    
+}
+
+.main {
+    
+    width: 500px;
+    height: 500px;
+    background-color: rgb(245, 245, 232);
+    border: solid 2px;
+}
+.theinfo {
+    
+    margin: 10px;
+    padding: 10px;
+}
+.inputs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 50px;
+    text-align: left;
+    
+}
+.button {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+}
+.button > input {
+    width: 70px;
+    color: aliceblue;
+    background-color: rgb(136, 136, 194)
+}
+
+h2 {
+    text-decoration: underline;
+}
+p{
+    text-align: left;
+}

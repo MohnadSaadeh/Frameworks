@@ -1,0 +1,14 @@
+<h1>Random Numbers</h1>
+
+{% for n in num %}
+
+    <p>{{ n }}</p>
+
+{% endfor %}
+
+
+
+<h1>Students</h1>
+{% for s in students %}
+        <p>{{ s['name'] }} - {{ s['age'] }}</p>
+    {% endfor %}

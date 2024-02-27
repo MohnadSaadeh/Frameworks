@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckBoard 3 </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/the_style.css') }}"></head>
+
+</head>
+<body>
+    <div class="container">
+        <h2> CheckBoard : {{varx}} * {{vary}} </h2>
+        {% for i  in range(varx): %}
+        <div class="raw">
+            {% for j in range(vary): %}
+            <div class="color{{(i+j)%2+1}}" >
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
