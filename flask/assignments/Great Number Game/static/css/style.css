@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: cursive;
+    text-align:  center;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.helper_color {
+    width: 200px;
+    height: 200px;
+    background-color: brown;
+    border: solid black;
+}
+h2 {
+margin-top: 35%;
+}

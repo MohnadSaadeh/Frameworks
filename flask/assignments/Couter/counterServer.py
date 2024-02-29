@@ -17,7 +17,6 @@ def the_new_route():
     session.clear()
     return redirect ('/')   
 
-
 @app.route('/plus2')
 def theplus2():
     session['count']  += 1
