@@ -16,6 +16,19 @@
     background-color: brown;
     border: solid black;
 }
+
+.helper_color2 {
+    width: 200px;
+    height: 200px;
+    background-color: rgb(245, 235, 93);
+    border: solid black;
+}
+.helper_color3 {
+    width: 200px;
+    height: 200px;
+    background-color: rgb(93, 245, 93);
+    border: solid black;
+}
 h2 {
 margin-top: 35%;
 }

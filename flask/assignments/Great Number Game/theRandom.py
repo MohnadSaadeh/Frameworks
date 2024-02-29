@@ -7,16 +7,33 @@ app.secret_key = 'my random'
 @app.route('/')
 def theroot1():
     session['rand'] =  random.randint(1,100)
+    session['theGuessed']=0
     print(session['rand'])
     return render_template("index.html")
 
 
 @app.route('/yourguess' , methods = ['POST'])
 def theguss():
-    session['theGuessed'] = request.form['yournu_num']
-    return render_template('index.html')
+
+    session['theGuessed'] = int(request.form['yournu_num']) 
 
 
+    return render_template("index.html")
+
+
+
+
+
+
+
+
+
+
+
+@app.route('/clear')
+def theclear():
+    session.clear()
+    return redirect('/')
 
 
 if __name__=="__main__":

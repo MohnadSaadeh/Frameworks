@@ -14,14 +14,35 @@
     <p>{{session['rand']}}</p>
 
     <div class="container">
+        {% if ( session['theGuessed'] > session['rand'] ): %}
         <div class="helper_color">
             <h2>{{session['theGuessed']}}</h2>
+            <h3>is too high</h3>
         </div>
+        {% elif ( session['theGuessed'] == session['rand'] ): %}
+        <div class="helper_color3">
+            <h2>{{session['theGuessed']}}</h2>
+            <h3>you are true</h3>
+        </div>
+
+
+
+        {% else: %}
+        <div class="helper_color2">
+            <h2>{{session['theGuessed']}}</h2>
+            <h3>is too low</h3>
+        </div>
+
+        {% endif %}
     </div>
 
     <form action="/yourguess" method="post" >
         <input type="text" name="yournu_num">
         <button>Submit</button>
+    </form>
+
+    <form action="/clear" >
+        <button>plat again</button>
     </form>
 
 </body>
