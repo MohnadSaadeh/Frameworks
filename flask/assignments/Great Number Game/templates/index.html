@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Greate Number game</title>
     <link rel="stylesheet" href="{{ url_for('static' , filename='css/style.css' ) }}">
-
 </head>
 <body>
-    <h1>wellcome to the greate Number game</h1>
+    <h1>Wellcome to the Great Number Game</h1>
     <p>i am thinhing of a number between 1 and 100</p>
-    <p>take a guess !</p>
-    <p>{{session['rand']}}</p>
-
+    
+    <!-- <h4>{{session['rand']}}</h4> -->
     <div class="container">
+        {% if ( session['theGuessed'] != 0 ): %}
         {% if ( session['theGuessed'] > session['rand'] ): %}
         <div class="helper_color">
             <h2>{{session['theGuessed']}}</h2>
@@ -23,27 +22,25 @@
         <div class="helper_color3">
             <h2>{{session['theGuessed']}}</h2>
             <h3>you are true</h3>
+            <form action="/clear" >
+                <button class="clearsession">play again</button>
+            </form>
         </div>
-
-
-
         {% else: %}
         <div class="helper_color2">
             <h2>{{session['theGuessed']}}</h2>
             <h3>is too low</h3>
         </div>
-
         {% endif %}
+        {%else: %}
+        <p>Please Take a Aguess !</p>
+        {% endif %}
+
     </div>
-
     <form action="/yourguess" method="post" >
-        <input type="text" name="yournu_num">
+        <input type="text" name="yournu_num" value="0">
         <button>Submit</button>
+    
     </form>
-
-    <form action="/clear" >
-        <button>plat again</button>
-    </form>
-
 </body>
 </html>
