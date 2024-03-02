@@ -7,12 +7,26 @@
     <link rel="stylesheet" href="{{ url_for('static' , filename='css/style.css' ) }}">
 </head>
 <body>
-    <h1>Wellcome to the Great Number Game</h1>
-    <p>i am thinhing of a number between 1 and 100</p>
+    <h1>Welcome to the Great Number Game</h1>
+    <p>i am thinking of a number between 1 and 100</p>
     
-    <!-- <h4>{{session['rand']}}</h4> -->
+    <h4>{{session['theGuessed']}}</h4>
+    <h3> you have only {{session['attemptsUser']}} attempts</h3>
     <div class="container">
-        {% if ( session['theGuessed'] != 0 ): %}
+        {% if ( session['attempts'] != 0 ): %} 
+        
+        <!-- if the number is true in the 10th attempt you will win the game-->
+        {% if ( session['attempts'] == 10 and session['theGuessed'] != session['rand'] ): %} 
+        <div class="helper_color_lose">
+            <h2>{{session['theGuessed']}}</h2>
+            <h3> Game Over </h3> 
+            <h3>you take all of the {{session['attempts']}} Attemps!! </h3>
+            <form action="/clear" >
+                <button class="clearsession">play again</button>
+            </form>
+        </div>
+        {% endif %}
+        
         {% if ( session['theGuessed'] > session['rand'] ): %}
         <div class="helper_color">
             <h2>{{session['theGuessed']}}</h2>
@@ -21,7 +35,8 @@
         {% elif ( session['theGuessed'] == session['rand'] ): %}
         <div class="helper_color3">
             <h2>{{session['theGuessed']}}</h2>
-            <h3>you are true</h3>
+            <h3>Fantasic !! </h3> 
+            <h3>{{session['attempts']}} Attemps!! </h3>
             <form action="/clear" >
                 <button class="clearsession">play again</button>
             </form>
@@ -32,10 +47,12 @@
             <h3>is too low</h3>
         </div>
         {% endif %}
+        
+        
         {%else: %}
         <p>Please Take a Aguess !</p>
         {% endif %}
-
+        
     </div>
     <form action="/yourguess" method="post" >
         <input type="text" name="yournu_num" value="0">
