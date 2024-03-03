@@ -3,7 +3,6 @@
     padding: 0;
     font-family:'Courier New', Courier, monospace;
     text-align:  center;
-    
 }
 h4 {
     color: rgb(186, 228, 228);
@@ -12,18 +11,18 @@ h4 {
 }
 p{
     font-size: larger;
-
 }
 
 body{
+    display: flex;
     background-color: rgb(149, 190, 226);
+    flex-direction: column;
 }
 .container {
-    
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
 .helper_color {
     width: 200px;
@@ -32,8 +31,8 @@ body{
     border: solid black;
 }
 .helper_color_lose{
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     background-color: rgb(221, 9, 9);
     border: solid black;
 }
@@ -45,16 +44,15 @@ body{
     border: solid black;
 }
 .helper_color3 {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     background-color: rgb(93, 245, 93);
     border: solid black;
 }
 
 form {
-    
-    flex-direction: column;
     justify-content: center;
+    border: 30px;
     padding: 20px;
     margin: 20px;
 }
@@ -66,7 +64,12 @@ button {
     align-items:center;
     align-content: center;
 }
+.clearsession{
+    width: 200px;
+    height: 45px;
+}
 input{
+    margin: 10px;
     width: 80px;
     height: 30px;
 }

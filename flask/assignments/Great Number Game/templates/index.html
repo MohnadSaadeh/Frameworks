@@ -7,15 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static' , filename='css/style.css' ) }}">
 </head>
 <body>
-    <h1>Welcome to the Great Number Game</h1>
-    <p>i am thinking of a number between 1 and 100</p>
+    <h1>Welcome To The Great Number Game</h1>
+    <p>Iam Thinking Of A Number Between 1 & 100</p>
     
-    <h4>{{session['theGuessed']}}</h4>
-    <h3> you have only {{session['attemptsUser']}} attempts</h3>
+    <h3> You Have {{session['attemptsUser']}} Attempts</h3>
     <div class="container">
-        {% if ( session['attempts'] != 0 ): %} 
+        {% if (11 > session['attempts'] > 0 ): %} 
         
-        <!-- if the number is true in the 10th attempt you will win the game-->
+        <!-- if you didnt guessthe correct num in 10 times , ypu will lose-->
         {% if ( session['attempts'] == 10 and session['theGuessed'] != session['rand'] ): %} 
         <div class="helper_color_lose">
             <h2>{{session['theGuessed']}}</h2>
@@ -25,13 +24,23 @@
                 <button class="clearsession">play again</button>
             </form>
         </div>
-        {% endif %}
-        
-        {% if ( session['theGuessed'] > session['rand'] ): %}
+        {% elif ( session['theGuessed'] > session['rand'] ): %}
         <div class="helper_color">
-            <h2>{{session['theGuessed']}}</h2>
-            <h3>is too high</h3>
+            <div>
+                <h2>{{session['theGuessed']}}</h2>
+                <h3>is too high</h3>
+            </div>
+            <div>
+                <br><br>
+                <form action="/yourguess" method="post" >
+                <br>
+                <input type="number" name="yournu_num" placeholder="0" min="1" max="100" required>
+                <br>
+                <button>Submit</button>
+                </form>
+            </div>
         </div>
+        
         {% elif ( session['theGuessed'] == session['rand'] ): %}
         <div class="helper_color3">
             <h2>{{session['theGuessed']}}</h2>
@@ -41,23 +50,32 @@
                 <button class="clearsession">play again</button>
             </form>
         </div>
-        {% else: %}
+        {% elif ( session['rand'] > session['theGuessed']  ): %}
         <div class="helper_color2">
             <h2>{{session['theGuessed']}}</h2>
             <h3>is too low</h3>
+            <br><br>
+            <form action="/yourguess" method="post" >
+                <br>
+                <input type="number" name="yournu_num" placeholder="0" min="1" max="100" required>
+                <br>
+                <button>Submit</button>
+                </form>
+        </div>
+        
+        {% endif %}
+        {%else: %}
+        <div>
+            <br><br>
+            <p>Please Take a Aguess !</p>
+            <form action="/yourguess" method="post" >
+                <br>
+                <input type="number" name="yournu_num" placeholder="0" min="1" max="100" required>
+                <br>
+                <button>Submit</button>
+            </form>
         </div>
         {% endif %}
-        
-        
-        {%else: %}
-        <p>Please Take a Aguess !</p>
-        {% endif %}
-        
     </div>
-    <form action="/yourguess" method="post" >
-        <input type="text" name="yournu_num" value="0">
-        <button>Submit</button>
-    
-    </form>
 </body>
 </html>
