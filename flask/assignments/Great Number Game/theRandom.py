@@ -31,5 +31,5 @@ def theclear():
     return redirect('/')
 
 if __name__=="__main__":
-    app.run(debug=True)
-    
+    #app.run(debug=True)
+    app.run(host='192.168.1.12' , port=1200, debug=True)
