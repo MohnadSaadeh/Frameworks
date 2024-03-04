@@ -19,18 +19,9 @@ def login():
             session['username'] = username 
             session['logged_in'] = True
             return redirect(url_for('index'))
-        else :
-            return render_template('/login.html' ,  error= 'invalid usernamme and password')
+        else:
+            return "Invalid Username/Password"
     return render_template('login.html')
-
-
-@app.route('/regester', methods=["GET" , "POST"])
-def regester():
-    if request.method == 'POST':
-        username = request.form['username']
-        username = request.form['password']
-    return render_template('regester.html')
-
 
 @app.route('/logout')
 def logout():
