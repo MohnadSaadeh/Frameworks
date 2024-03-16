@@ -1,0 +1,22 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.flag {
+    width: fit-content;
+    color: black;
+    border-style: solid ;
+    margin: 50px;
+}
+.time {
+    width: 700px;
+    color: black;
+    border-style: solid ;
+    padding: 10px , 500px , 10px , 500px;
+    }
+h1 {
+    text-align: center;
+    margin: 30px;
+}
