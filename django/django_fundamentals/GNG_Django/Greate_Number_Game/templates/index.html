@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Greate Number game</title>
-    <!-- {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css'  %}"> -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css'  %}">
 
 </head>
 <body>
     <h1>Welcome To The Great Number Game</h1>
     <p>Iam Thinking Of A Number Between 1 & 100</p>
     
-    <h3> You Have {{attemptsUser}} Attempts</h3>
+    <h3> You Have {{request.session.attemptsUser }} Attempts</h3>
     <h3>  {{request.session.rand}} </h3>
     <div class="container">
         
-        
         <div>
             <p>Please Take a Aguess !</p>
+            {% if request.session.attempts != 0 %}
+            <div class="{{ request.session.color }}">
+                <h2>{{request.session.yournu_num}}</h2>
+                <br>
+                <h3> {{request.session.resultMesseg}} </h3>
+            </div>
+            {% endif %}
             <form action="/yourguess" method="post" >
                 {% csrf_token %}
                 <br>
-                <input class="form-control" type="number" name="yournu_num" placeholder="0" min="1" max="100" required>
+                <input class="form-control" type="number" name="yournu_num" placeholder="0" min="0" max="100" required>
                 <button class="">Guess Now</button>
             </form>
         </div>

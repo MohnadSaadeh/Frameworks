@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>too higt</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css'  %}">
+</head>
+<body>
+    <h1>Welcome To The Great Number Game</h1>
+    <p>Don't Worry You Can Play Again</p>
+    <div class="container">
+        <div>
+            
+            {% if request.session.attempts != 0 %}
+            <div class="helper_color_lose">
+                <h2>{{request.session.yournu_num}}</h2>
+                <h3>was {{request.session.resultMesseg}} </h3>
+                <h1> Game Over </h1>
+                <h3> The Random Number Was </h3>
+                <h3>{{request.session.rand}}</h3>
+            </div>
+            {% endif %}
+            <form action="/"  >
+                {% csrf_token %}
+                <br>
+                <button class="">Play Again</button>
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>
