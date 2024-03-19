@@ -13,12 +13,12 @@
     <p>Iam Thinking Of A Number Between 1 & 100</p>
     
     <h3> You Have {{request.session.attemptsUser }} Attempts</h3>
-    <h3>  {{request.session.rand}} </h3>
+    <!-- <h3>  {{request.session.rand}} </h3> -->
     <div class="container">
         
         <div>
             <p>Please Take a Aguess !</p>
-            {% if request.session.attempts != 0 %}
+            {% if request.session.attempts != 0  %}
             <div class="{{ request.session.color }}">
                 <h2>{{request.session.yournu_num}}</h2>
                 <br>

@@ -4,14 +4,13 @@ import random
 
 def theroot1(request):
     request.session['rand'] =  int(random.randint(1,100))
-    request.session['theGuessed'] = 0
     request.session['attempts'] = 0
-    request.session['attemptsUser'] = 5
+    request.session['attemptsUser'] = 7
 
     return render(request , "index.html" )
 
 def yourguess(request):
-    request.session['yournu_num'] =   request.POST['yournu_num']
+    request.session['yournu_num'] = request.POST['yournu_num']
     request.session['attempts'] += 1
     request.session['attemptsUser'] -= 1
     grater = "helper_color"
@@ -21,7 +20,7 @@ def yourguess(request):
     messegBIG = "Too High"
     messegLESS = "Too Low"
     messegEQUAL = "Is True"
-    if (request.session['attemptsUser'] == 0):
+    if (request.session['attemptsUser'] == 0 and int(request.session['yournu_num']) != request.session['rand']):
         return render(request , "loose.html")
     elif (int(request.session['yournu_num']) > request.session['rand']):
         request.session['color'] = grater
@@ -34,5 +33,5 @@ def yourguess(request):
     elif (int(request.session['yournu_num']) == request.session['rand']):
         request.session['color'] = equal
         request.session['resultMesseg'] = messegEQUAL
-        return render(request , "index.html")
+        return render(request , "win.html")
     

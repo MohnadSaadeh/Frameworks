@@ -9,15 +9,17 @@
 </head>
 <body>
     <h1>Welcome To The Great Number Game</h1>
-    <p>Don't Worry You Can Play Again</p>
+    <p>You Are Greate !!</p>
     <div class="container">
         <div>
             
             {% if request.session.attempts != 0 %}
-            <div class="helper_color_lose">
+            <div class="helper_color3">
                 
-                <h1> Game Over </h1>
-                <h3> The Random Number Was </h3>
+                <h3>Exactlly {{request.session.resultMesseg}} </h3>
+                <h1> Fantastic ! </h1>
+                <br>
+                <h3> It Was </h3>
                 <h3>{{request.session.rand}}</h3>
             </div>
             {% endif %}
