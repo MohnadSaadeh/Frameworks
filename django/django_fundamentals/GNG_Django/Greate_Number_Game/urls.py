@@ -5,4 +5,5 @@ urlpatterns = [
         path('yourguess', views.yourguess),
         path('loose', views.lose_page),
         path('samapage', views.same_page),
+        path('winpage', views.win_page),
     ]

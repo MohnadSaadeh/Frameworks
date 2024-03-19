@@ -14,9 +14,9 @@ p{
     font-size: larger;
 }
 
-body{
+.bodyclass{
     display: flex;
-    background-color: rgb(149, 190, 226);
+    background-color: rgb(149, 185, 226);
     flex-direction: column;
 }
 .container {
@@ -73,3 +73,6 @@ input[type="number"] {
     border-radius:  10px;
     box-sizing: border-box;
 }
+/* .btn-primary .btn-lg {
+
+} */
