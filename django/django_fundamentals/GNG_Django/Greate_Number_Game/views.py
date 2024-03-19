@@ -1,4 +1,4 @@
-from django.shortcuts import render ,HttpResponse 
+from django.shortcuts import render ,HttpResponse ,redirect
 import random
 # Create your views here.
 
@@ -21,17 +21,25 @@ def yourguess(request):
     messegLESS = "Too Low"
     messegEQUAL = "Is True"
     if (request.session['attemptsUser'] == 0 and int(request.session['yournu_num']) != request.session['rand']):
-        return render(request , "loose.html")
+        return redirect("/loose")
+
     elif (int(request.session['yournu_num']) > request.session['rand']):
         request.session['color'] = grater
         request.session['resultMesseg'] = messegBIG
-        return render(request , "index.html")
+        return redirect("/samapage")
+
     elif (int(request.session['yournu_num']) < request.session['rand']):
         request.session['color'] = less
         request.session['resultMesseg'] = messegLESS
-        return render(request , "index.html")
+        return redirect("/samapage")
+
     elif (int(request.session['yournu_num']) == request.session['rand']):
         request.session['color'] = equal
         request.session['resultMesseg'] = messegEQUAL
         return render(request , "win.html")
     
+def lose_page(request):
+    return render(request , "loose.html")
+
+def same_page(request):
+    return render(request , "index.html")
