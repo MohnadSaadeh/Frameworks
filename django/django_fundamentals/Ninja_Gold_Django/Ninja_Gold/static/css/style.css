@@ -162,3 +162,14 @@ body {
     display: block !important;
 }
 
+.yourgold{
+    height: 40px;
+    margin: 20px;
+    padding: 50px;
+}
+.labelGold {
+    width: 50px;
+    margin: 20px;
+    padding: 50px;
+
+}

@@ -35,25 +35,32 @@
 <div class="container marketing">
 
     <!-- Three columns of text below the carousel -->
+<label>Your Gold</label>
+<textarea class="form-control" name="yorgold"  > {{request.session.yourgold}} </textarea>
+
 <div class="row">
+
     <div class="col-lg-3">
         <svg class="bd-placeholder-img rounded-circle" width="160" height="160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
             <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/>
         </svg>
         <h2>Farm</h2>
         <p>Earn 10 - 20 Gold</p>
-        <form method="post" action="/process">
+
+        <form  action="/process_money" method="post">
             {% csrf_token %}
             <input type="hidden" name="which_form" value="farm">
             <input class="btn btn-secondary" type="submit" value="Find Gold">
         </form>
+
     </div>
+    
     <div class="col-lg-3">
         <svg class="bd-placeholder-img rounded-circle" width="160" height="160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">            <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/>
         </svg>
         <h2>Cave</h2>
         <p>Earn 10 - 20 Gold</p>
-        <form method="post" action="/process">
+        <form method="post" action="/process_money">
             {% csrf_token %}
             <input type="hidden" name="which_form" value="cave">
             <input class="btn btn-secondary" type="submit" value="Find Gold">
@@ -67,7 +74,7 @@
         </svg>
         <h2>House</h2>
         <p>Earn 10 - 20 Gold</p>
-        <form method="post" action="/process">
+        <form method="post" action="/process_money">
             {% csrf_token %}
             <input type="hidden" name="which_form" value="house">
             <input class="btn btn-secondary" type="submit" value="Find Gold">
@@ -83,8 +90,8 @@
             <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/>
         </svg>
         <h2 >Quest</h2>
-        <p>Earn / Take 0 - 50 Gold</p>
-        <form method="post" action="/process">
+        <p>Earn/Take 0-50 Gold</p>
+        <form method="post" action="/process_money">
             {% csrf_token %}
             <input type="hidden" name="which_form" value="quest">
             <input class="btn btn-secondary" type="submit" value="Find Gold">
@@ -93,14 +100,14 @@
 
 </div>
 
-<hr class="featurette-divider">
+<hr>
 
-<label for="floatingTextarea2">Comments</label>
+<h4>Activities</h4>
 <br>
-    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px ; margin: 0;">
-    </textarea>
 
-    
+    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px  ; margin: 0; width: 100%;">
+        {{request.session.commints_list}}
+    </textarea>
 <hr class="featurette-divider">
 </div><!-- /.container -->
 </body>
