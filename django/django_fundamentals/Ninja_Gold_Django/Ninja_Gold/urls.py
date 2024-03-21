@@ -4,4 +4,5 @@ from . import views
 urlpatterns = [
     path('', views.index),
     path('process_money', views.earn_take),
+    path('earn', views.earn)
 ]

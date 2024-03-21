@@ -1,22 +1,17 @@
-from django.shortcuts import render
-import random                # import the random module
-	# random number between 1-100
+from django.shortcuts import render , redirect
+import random
+from time import gmtime, strftime
+
 
 # Create your views here.
 
 def index(request):
     request.session['yourgold'] = 0
-    request.session['commints_list'] = []
-
-
-
+    request.session['commints_list'] = {}  #Dict
     return render(request , 'index.html')
     
-
-
 def earn_take(request):
     
-
     if request.POST['which_form'] == 'farm':
         request.session['random'] = int(random.randint(10, 20))
         request.session['yourgold'] += request.session['random']
@@ -33,6 +28,11 @@ def earn_take(request):
         request.session['random'] = int(random.randint(-50, 50))
         request.session['yourgold'] += request.session['random']
 
+    request.session['commints_list'].update({ request.POST['which_form'] : request.session['random']}   )
+    return redirect("/earn")
 
-    request.session['commints_list'].append(  request.session['random'])
-    return render(request , 'index.html')
+def earn(request):
+    context = {
+        "time": strftime("%Y-%m-%d %H:%M %p , %H:%M:%S ", gmtime())
+    }
+    return render(request , 'index.html' ,context)

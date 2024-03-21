@@ -16,7 +16,7 @@
     
 
 </head>
-<body>
+<body style="background-color: rgb(205, 204, 253);">
     
 <header data-bs-theme="dark">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -104,10 +104,19 @@
 
 <h4>Activities</h4>
 <br>
-
-    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px  ; margin: 0; width: 100%;">
-        {{request.session.commints_list}}
-    </textarea>
+    <td>
+        <tr>
+        {% for form , item in request.session.commints_list.items %}
+            {% if item >= 0 %}
+                <li style="color: green;">You enterd a {{form}} and you earned {{ item }}  gold. ( {{time}} )</li> 
+            {% elif 0 > item  %}
+                <li style="color: red;">You enterd a {{form}} and you earned {{ item }}  gold. ( {{time}} )</li> 
+            {%endif%}
+        {% endfor %}
+        </tr>
+    </td>
+    
+    
 <hr class="featurette-divider">
 </div><!-- /.container -->
 </body>

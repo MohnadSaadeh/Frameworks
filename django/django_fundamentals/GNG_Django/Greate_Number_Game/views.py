@@ -1,9 +1,10 @@
 from django.shortcuts import render ,HttpResponse ,redirect
 import random
+import . from models
 # Create your views here.
 
 def theroot1(request):
-    request.session['rand'] =  int(random.randint(1,100))
+    request.session['rand'] =  models.get_random_num()
     request.session['attempts'] = 0
     request.session['attemptsUser'] = 10
     return render(request , "index.html" )
@@ -24,6 +25,8 @@ def yourguess(request):
     elif (int(request.session['yournu_num']) == request.session['rand']):
         request.session['result'] = "equal"
         return redirect("/winpage")
+
+
 
 def lose_page(request):
     return render(request , "loose.html")
