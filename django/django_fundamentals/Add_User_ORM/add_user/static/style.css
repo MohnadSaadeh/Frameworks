@@ -1,0 +1,12 @@
+table, th, td {
+    border:1px solid black;
+}
+.table {
+    width:50% ;
+}
+.theform .name {
+    display: flex;
+}
+p {
+    margin-right: 10px;
+}
