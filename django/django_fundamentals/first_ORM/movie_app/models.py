@@ -43,13 +43,41 @@ class User(models.Model):
     age = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)  # auto_now_add=True    >>> adds the current date/time when an object is created    
     updated_at =models.DateTimeField(auto_now=True)       # updates any time the object is modified
-    # fields removed for brevity
     
-    def __str__(self):
-        return f"<User object: {self.first_name} ({self.id})>"
-
-def add_user(f,l,e,a):
-    User.objects.create(first_name = f , last_name = l , email_address = e , age = a )
+def add_user(firstName,lastName,eMail,aGe):
+    User.objects.create(first_name = firstName , last_name = lastName , email_address = eMail , age = aGe )
 
 def get_all_users():
     return User.objects.all()
+
+
+class Author(models.Model):
+    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+class Book(models.Model):
+    title = models.CharField(max_length=255)
+    author = models.ForeignKey(Author, related_name="books", on_delete = models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+def create_auther():
+    Author.objects.create(name = autherName)
+
+def create_book(bookName , autherName):
+    #create_auther()
+    our_auther = Author.objects.get(name = autherName)
+    Book.objects.create(title=bookName,author=our_auther)
+
+def get_all_books():
+    return Book.objects.all()
+
+def delete_author(id):
+    del_author = Author.objects.get(id = id)
+    del_author.delete()
+
+def delete_book(id):
+    del_book = Book.objects.get(id = id)
+    del_book.delete()
+
+
