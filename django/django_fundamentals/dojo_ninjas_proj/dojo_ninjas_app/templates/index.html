@@ -113,13 +113,15 @@
 
     <h3 class="h3 mb-3 fw-normal ">All the Dojos</h3>
             <div class="form_container">
-
                 {% for all_d in all_dojos  %}
                 <div>
                     <ul>
-                        <P> Ninjas at the {{all_d.name}} </P> 
+                        <P> Ninjas at : ( <em>{{all_d.name}}</em> )  </P> 
+                        {% for all_nin in all_d.ninjas.all %}
                         <li>
+                            {{all_nin.first_name }}
                         </li>
+                        {% endfor %}
                     </ul>
                     {% endfor %}
                 </div>

@@ -22,9 +22,10 @@ class Ninja(models.Model):
     def __repr__(self):
         return "first_name: {}".format(self.first_name)
 
-
 def get_all_ninjas():
     return Ninja.objects.all()
     
 def get_all_dojos():
     return Dojo.objects.all()
+
+
