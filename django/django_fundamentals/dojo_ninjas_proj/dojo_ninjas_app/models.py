@@ -28,4 +28,11 @@ def get_all_ninjas():
 def get_all_dojos():
     return Dojo.objects.all()
 
+def add_dojo(dojo_name,dojo_city,dojo_state,dojo_desc):
+    return Dojo.objects.create(name=dojo_name, city=dojo_city , state = dojo_state ,desc=dojo_desc)
+
+def add_ninja(ninja_first_name ,ninja_last_name,ninja_dojo):
+    return Ninja.objects.create(first_name=ninja_first_name ,last_name=ninja_last_name , dojo=(Dojo.objects.get(name=ninja_dojo)))
+
+
 
