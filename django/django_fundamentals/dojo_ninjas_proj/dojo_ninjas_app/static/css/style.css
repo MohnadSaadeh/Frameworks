@@ -31,14 +31,30 @@ body {
     padding: 20px;
     margin: 20px;
 }
-h3 {
+h3  {
     text-align: center;
 }
 p {
     color: brown;
 
 }
-
+.all_DojosNinjas_container {
+    width:500px;
+}
+.list_of_ninja {
+    display:flex;
+    justify-content: space-between;
+}
+.an_action_delete {
+        border: none;
+        cursor: pointer;
+        appearance: none;
+        background-color: inherit;
+}
+.dojo_title {
+    display: flex; 
+    align-items: flex-start; 
+}
 
 
 

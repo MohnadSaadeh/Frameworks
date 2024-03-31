@@ -32,5 +32,18 @@ def get_the_dojo(request):
 
     
     return redirect('/')
+
+def delete_ninja(request):
+    
+    if request.POST['delete_record'] == "ninja" :
+        ninja_id = request.POST['ninja_to_delete']
+        models.delete_a_ninja(ninja_id)
+
+    elif request.POST['delete_record'] == "dojo" :
+        dojo_id = request.POST['ninja_to_delete']
+        models.delete_a_dojo(dojo_id)
+
+
+    return redirect('/')
     
 
