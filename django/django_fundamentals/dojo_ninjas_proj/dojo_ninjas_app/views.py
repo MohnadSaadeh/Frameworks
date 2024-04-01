@@ -17,9 +17,9 @@ def homepage(request):
 def get_the_dojo(request):
     if request.POST['dojo_or_ninja'] == 'dojo':
         dojo_name = request.POST['dojo_name']
-        dogo_city = request.POST['dojo_city']
-        dogo_state = request.POST['dojo_state']
-        dogo_desc = request.POST['dojo_discription']
+        dojo_city = request.POST['dojo_city']
+        dojo_state = request.POST['dojo_state']
+        dojo_desc = request.POST['dojo_discription']
 
         models.add_dojo(dojo_name,dojo_city,dojo_state,dojo_desc)
 
@@ -47,3 +47,7 @@ def delete_ninja(request):
     return redirect('/')
     
 
+def delete_ninja_by_anchor(req,id):  # Only for using <a> anchor to delete
+    models.anchor_delete_ninja(id)
+
+    return redirect('/')

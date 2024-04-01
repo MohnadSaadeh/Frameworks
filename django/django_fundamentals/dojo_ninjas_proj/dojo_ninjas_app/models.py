@@ -15,8 +15,8 @@ class Dojo(models.Model):
 class Ninja(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    dojo = models.ForeignKey(Dojo, related_name="ninjas", on_delete = models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
+    dojo = models.ForeignKey(Dojo, related_name="ninjas", on_delete = models.CASCADE) #prtect ///////////  set null
+    created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True)
     
     def __repr__(self):
@@ -41,3 +41,9 @@ def delete_a_ninja(ninja_id):
 def delete_a_dojo(dojo_id):
     a_dojo = Dojo.objects.get(id = dojo_id)
     return a_dojo.delete()
+
+
+def anchor_delete_ninja(id):          #using <a> anchor to delete
+    a_ninja = Ninja.objects.get(id = id)
+    return a_ninja.delete()
+
