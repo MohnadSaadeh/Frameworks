@@ -23,12 +23,7 @@ def homepage(request):
 
 def get_the_dojo(request):
     if request.POST['dojo_or_ninja'] == 'dojo':
-        # dojo_name = request.POST['dojo_name']
-        # dojo_city = request.POST['dojo_city']
-        # dojo_state = request.POST['dojo_state']
-        # dojo_desc = request.POST['dojo_discription']
-        models.add_dojo_(request.POST)
-        # models.add_dojo(dojo_name,dojo_city,dojo_state,dojo_desc)
+        models.add_dojo_(request.POST)  #(request.POST) this a short way to take all POST data to the models
 
     elif request.POST['dojo_or_ninja'] == 'ninja':
         ninja_first_name = request.POST['ninja_first_name']

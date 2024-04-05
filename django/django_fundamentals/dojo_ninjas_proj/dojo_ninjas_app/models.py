@@ -47,5 +47,5 @@ def anchor_delete_ninja(id):          #using <a> anchor to delete
     a_ninja = Ninja.objects.get(id = id)
     return a_ninja.delete()
 
-def add_dojo_(post_data):
+def add_dojo_(post_data): #it comes from (request.POST) this a short way to take all POST data from the views
     return Dojo.objects.create(name=post_data['dojo_name'], city=post_data['dojo_city'] , state = post_data['dojo_state'] ,desc=post_data['dojo_discription'])
