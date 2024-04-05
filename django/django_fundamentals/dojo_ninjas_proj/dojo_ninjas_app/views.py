@@ -2,6 +2,13 @@ from django.shortcuts import render , redirect
 from . import models
 
 # Create your views here.
+
+#This function will do ...
+# Input:
+# Outputs:
+# Developer Name:
+# Date Time:
+# 
 def homepage(request):
 
     ninjas = models.get_all_ninjas()
@@ -16,12 +23,12 @@ def homepage(request):
 
 def get_the_dojo(request):
     if request.POST['dojo_or_ninja'] == 'dojo':
-        dojo_name = request.POST['dojo_name']
-        dojo_city = request.POST['dojo_city']
-        dojo_state = request.POST['dojo_state']
-        dojo_desc = request.POST['dojo_discription']
-
-        models.add_dojo(dojo_name,dojo_city,dojo_state,dojo_desc)
+        # dojo_name = request.POST['dojo_name']
+        # dojo_city = request.POST['dojo_city']
+        # dojo_state = request.POST['dojo_state']
+        # dojo_desc = request.POST['dojo_discription']
+        models.add_dojo_(request.POST)
+        # models.add_dojo(dojo_name,dojo_city,dojo_state,dojo_desc)
 
     elif request.POST['dojo_or_ninja'] == 'ninja':
         ninja_first_name = request.POST['ninja_first_name']
