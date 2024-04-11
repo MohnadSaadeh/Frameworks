@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C + R Users</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+    <table class="table" >
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            
+        </tr>
+        {% for u in all_users %}
+        <tr>
+            <td>
+                {{u.id}}
+            </td>
+            <td>
+                {{u.first_name}}
+            </td>
+            <td>
+                {{u.last_name}}
+            </td>
+            <td>
+                {{u.email_address}}
+            </td>
+            <td>
+                {{u.age}}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+<br>
+<hr>
+<br>
+
+    <form action="/add_user" method="POST">
+    {% csrf_token %}
+    <div class="theform" >
+        <div>
+            <div class="name">
+                <div >
+                    <p>First Name</p>
+                    <input type="text" name="first_name">
+                </div>
+                <div >
+                    <p>Last Name</p> 
+                    <input type="text" name="last_name">
+                </div>
+            </div>
+
+        <div class="name">
+            <div>
+                <p>Email</p>
+                <input type="text" name="email">
+            </div>
+            <div >
+                <p>Age</p>
+                <input type="text" name="age">
+            </div>   
+        </div>
+        
+
+    </div>
+    <input type="submit" value="Add">
+    </form>
+
+</body>
+</html>

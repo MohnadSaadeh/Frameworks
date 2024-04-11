@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congrats</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css'  %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css'  %}">
+</head>
+<body class="bodyclass">
+    <h1>Welcome To The Great Number Game</h1>
+    <p>You Are Greate !!</p>
+    <div class="container">
+        <div>
+            {% if request.session.attempts != 0 %}
+            <div class="helper_color3">
+                <h3>Exactlly Its True </h3>
+                <h1>Fantastic</h1>
+                <h3> It Was </h3>
+                <h3>{{request.session.rand}}</h3>
+            </div>
+            {% endif %}
+            <form action="/"  >
+                {% csrf_token %}
+                <br>
+                <button class="btn btn-success">Play Again</button>
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>

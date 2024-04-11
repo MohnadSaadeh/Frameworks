@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Carousel Template · Bootstrap v5.3</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> 
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="/docs/5.3/assets/js/color-modes.js"></script>
+    
+</head>
+<body style="background-color: rgb(205, 204, 253);">
+    
+<header data-bs-theme="dark">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" >Ninja Gold</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<br>
+<br>
+<div class="container marketing">
+
+<label>Your Gold</label>
+<textarea class="form-control" name="yorgold"  > {{request.session.yourgold}} </textarea>
+<div class="row">
+    <div class="col-lg-3">
+        <svg class="bd-placeholder-img rounded-circle" width="160" height="160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/>
+        </svg>
+        <h2>Farm</h2>
+        <p>Earn 10 - 20 Gold</p>
+        <form  action="/process_money" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="which_form" value="farm">
+            <input class="btn btn-secondary" type="submit" value="Find Gold">
+        </form>
+    </div>
+    <div class="col-lg-3">
+        <svg class="bd-placeholder-img rounded-circle" width="160" height="160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">            <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/>
+        </svg>
+        <h2>Cave</h2>
+        <p>Earn 10 - 20 Gold</p>
+        <form method="post" action="/process_money">
+            {% csrf_token %}
+            <input type="hidden" name="which_form" value="cave">
+            <input class="btn btn-secondary" type="submit" value="Find Gold">
+        </form>
+    </div>
+    <div class="col-lg-3 ">
+        <svg class="bd-placeholder-img rounded-circle" width="160" height="160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/>
+        </svg>
+        <h2>House</h2>
+        <p>Earn 10 - 20 Gold</p>
+        <form method="post" action="/process_money">
+            {% csrf_token %}
+            <input type="hidden" name="which_form" value="house">
+            <input class="btn btn-secondary" type="submit" value="Find Gold">
+        </form>
+    </div>
+    <div class="col-lg-2">
+        <svg class="bd-placeholder-img rounded-circle" width="160" height="160"  role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/>
+        </svg>
+        <h2 >Quest</h2>
+        <p>Earn/Take 0-50 Gold</p>
+        <form method="post" action="/process_money">
+            {% csrf_token %}
+            <input type="hidden" name="which_form" value="quest">
+            <input class="btn btn-secondary" type="submit" value="Find Gold">
+        </form>
+    </div>
+</div>
+<hr>
+<h4>Activities</h4>
+<br>
+    <td>
+        <tr>
+        {% for action_log in request.session.log_list %}
+            {% if action_log.deal == 'win' %}
+                <li style="color: green;">{{ action_log.session_string }}</li>
+            {% elif action_log.deal == 'lost'  %}
+                <li style="color: red;">{{ action_log.session_string }}</li>
+            {%endif%}
+        {% endfor %}
+        </tr>
+    </td>
+    
+<hr class="featurette-divider">
+</div>
+</body>
+</html>

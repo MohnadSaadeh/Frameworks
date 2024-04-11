@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Hi all my name is mohannad</h1>
+    <br>
+    <p>am a full stack Developer</p>
+    <p>the name : {{name}}</p>
+    <p>the color : {{favorite_color}}</p>
+    
+<br>
+    <p>Pets</p>
+<ul>
+{% for pet in pets %}
+    <li>{{pet}}</li>
+{% endfor %}
+</ul>
+    
+</body>
+</html>

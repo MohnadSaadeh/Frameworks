@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey info</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div class="main">
+        <div class="theinfo" >
+            <h2> Submitted Information</h2>
+            <div>
+                <div class="inputs">
+                    <p>Name : </p><p>{{session['username']}} </p>
+                </div>
+                <div class="inputs">
+                    <p>Dojo Location : </p> <p>{{session['userlocation']}} </p>
+                </div>
+                <div class="inputs">
+                    <p>Favorate Language </p> <p>{{session['userlanguage']}} </p>
+                    <!--  session['userlanguage']     directly from session              -->
+                </div>
+                <div class="inputs">
+                    <p>Comment : </p> 
+                    <p>{{session['usermaassege']}} </p>
+                </div>
+            </div>
+            <div class="button" >
+                <form action="/">
+                    <div class="button" ><input type="submit" value="Back">
+                    </div>
+                </form>
+            </div>
+        
+        </div>
+    </div>
+    
+</body>
+</html>

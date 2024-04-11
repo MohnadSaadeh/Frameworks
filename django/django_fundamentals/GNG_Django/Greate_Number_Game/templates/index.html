@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greate Number game</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css'  %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css'  %}">
+</head>
+<body class="bodyclass">
+    <h1>Welcome To The Great Number Game</h1>
+    <p>Iam Thinking Of A Number Between 1 & 100</p>
+    <h3> You Have {{request.session.attemptsUser }} Attempts</h3>
+    <div class="container">
+        <div>
+            <p>Please Take a Aguess !</p>
+            {% if request.session.attempts != 0  %} <!-- first if -->
+                {% if request.session.result == "grater" %}<!-- secound if -->
+                <div class="helper_color">
+                    <h2>{{request.session.yournu_num}}</h2>
+                    <br>
+                    <h3> Too High </h3>
+                </div>
+                {% elif request.session.result == "less" %}
+                <div class="helper_color2">
+                    <h2>{{request.session.yournu_num}}</h2>
+                    <br>
+                    <h3> Too Low </h3>
+                </div>
+                {% endif %}<!-- secound if -->
+            {% endif %}<!-- first if -->
+            <form action="/yourguess" method="post" >
+                {% csrf_token %}
+                <br>
+                <input  type="number" name="yournu_num" placeholder="0" min="0" max="100" required>
+                <button class="btn btn-primary btn-lg">Guess Now</button>
+            </form>
+        </div>
+        
+    </div>
+</body>
