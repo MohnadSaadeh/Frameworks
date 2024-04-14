@@ -1,22 +1,20 @@
 from django.db import models
-
+import re
 # Create your models here.
 
 class ShowManager(models.Manager):
     def basic_validator(self, postData):
         errors = {}
-        # EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        DATE_REGEX = re.compile(r'^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$')
         # add keys and values to errors dictionary for each invalid field
         if len(postData['title']) < 3  :
             errors["title"] = "title should be at least 3 characters"
-        if Show.objects.filter (title = postData['title']):
-            errors["title"] = "this show is already exist"
         if len(postData['network']) < 3:
             errors["network"] = "Network should be at least 3 characters"
         if len(postData['description']) < 3:
             errors["description"] = "a Description should be at least 3 characters"
-        # if not EMAIL_REGEX.match(postData['author_notes']):
-        #     errors["author_notes"] = "the note shuld be an E-mail"
+        if not DATE_REGEX.match(postData['release_date']):
+            errors["release_date"] = "the Date shuld be like YYYY-MM-DD"
         return errors
 
 
@@ -39,7 +37,16 @@ def all_shows():
 def view_a_show(id):
     return Show.objects.get(id = id)
 
+
+def update_a_show(id, show_title, show_network, show_release_date, show_description):
+    show = Show.objects.get(id = id)
+    show.title = show_title
+    show.network = show_network
+    show.release_date = show_release_date
+    show.description = show_description
+    show.save()
+    return show
+
 def delete_a_show(id):
     show = Show.objects.get(id = id)
     return show.delete()
-

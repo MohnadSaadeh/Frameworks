@@ -37,3 +37,6 @@ h3 {
 .messages {
     color: red;
 }
+.a_chosen_show {
+    display: flex;
+}

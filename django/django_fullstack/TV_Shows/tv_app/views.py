@@ -38,3 +38,29 @@ def view_a_show(request, id):
         "a_show" : the_show
     }
     return render(request, 'view_a_show.html', context)
+
+def edit_a_show(request, id):
+    the_show = models.view_a_show(id)
+    context = {
+        "a_show" : the_show
+    }
+    return render(request, 'edit_a_show.html', context)
+
+def update_a_show(request, id):
+    errors = models.Show.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        # redirect the user back to the form to fix the errors
+        return redirect(f'/edit_a_show/{id}' )
+    else:
+        show_title = request.POST['title']
+        show_network = request.POST['network']
+        show_release_date = request.POST['release_date']
+        show_description = request.POST['description']
+        models.update_a_show(id, show_title, show_network, show_release_date, show_description)
+        return redirect(f'/shows/{id}')
+
+def delete_a_show(request, id):
+    models.delete_a_show(id)
+    return redirect('/shows')
