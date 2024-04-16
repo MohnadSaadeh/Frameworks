@@ -11,7 +11,7 @@ class ShowManager(models.Manager):
             errors["title"] = "title should be at least 3 characters"
         if len(postData['network']) < 3:
             errors["network"] = "Network should be at least 3 characters"
-        if len(postData['description']) < 3:
+        if len(postData['description']) < 10: # shuld be at least 10 characters
             errors["description"] = "a Description should be at least 3 characters"
         if not DATE_REGEX.match(postData['release_date']):
             errors["release_date"] = "the Date shuld be like YYYY-MM-DD"
