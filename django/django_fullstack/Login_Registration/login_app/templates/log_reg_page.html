@@ -25,6 +25,7 @@
                 <div class="reg" >
                     <form class="formes" action="/register" method="post">
                         {% csrf_token %}
+                        <input type="hidden" name="log_reg" value="register">
                         <input type="text" name="firstname">
                         <input type="text" name="lastname" >
                         <input type="text" name="email" >
@@ -55,7 +56,8 @@
                 <div class="reg" >
                     <form class="formes" action="/log_in" method="post">
                         {% csrf_token %}
-                        <input type="email" name="email" >
+                        <input type="hidden" name="log_reg" value="login">
+                        <input type="text" name="email" >
                         <input type="password" name="password" >
                         
                         <input type="submit" value="Login">
@@ -65,7 +67,7 @@
             {% if messages %}
                 <ul class="messages">    
                     {% for message in messages %}    
-                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                        <li {% if message.extra_tags %} class="{{ message.email }}"{% endif %}>{{ message.tags }}</li>    
                     {% endfor %}
                 </ul>
                 {% endif %}

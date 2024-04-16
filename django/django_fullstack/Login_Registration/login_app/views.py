@@ -29,9 +29,9 @@ def register(request):
         return redirect('/')
 
 def login(request):
-    errors = models.User.objects.login_validator(request.POST)
-    if len(errors) > 0:
-        for key, value in errors.items():
+    errorslogin = models.User.objects.basic_validator(request.POST)
+    if len(errorslogin) > 0:
+        for key, value in errorslogin.items():
             messages.error(request, value)
         # redirect the user back to the form to fix the errors
         return redirect('/')
@@ -42,6 +42,10 @@ def login(request):
             if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
                 request.session['user_id'] = logged_user.id
                 return redirect('/success')
+            else:
+                messages.error(request, "Invalid Password")
+        else:
+            messages.error(request, "Invalid email you have to register")
         return redirect('/')
 
 def success(request):
