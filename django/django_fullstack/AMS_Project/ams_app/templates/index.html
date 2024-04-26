@@ -58,28 +58,22 @@
 <header data-bs-theme="dark">
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 <div class="container-fluid">
-    <a class="navbar-brand" href="#">Midical Center</a>
+    <a class="navbar-brand" href="#">ClinicMate</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-    </button>
+    </button><br><br>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Products</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link " href="#" >Our Company</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="#" >About Us</a>
-            </li>
-        </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+        <a  class="btn btn-outline-secondary"  aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-outline-secondary"  href="/aboutus" >About Us</a>
+        </li>
+    </ul>
     <div class="login_admin" >
         <h5><a href="/login_admin"> Log in </a></h5>
-        /////
+        
         <h5><a href="/registr_admin"> Registration </a></h5>
     </div>
     
@@ -157,206 +151,72 @@
 <!-- Three columns of text below the carousel -->
 
 <div class="row">
+  {% for clinic in clinics %}
+    
     <div class="col-lg-4">
-    <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-    <h2 class="fw-normal">Heading</h2>
-    <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+      {% if clinic.id == 1 %}
+      <img src="{% static 'img\dintal.jpg' %}" class="bd-placeholder-img rounded-circle" width="250" height="230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/> 
+      {%endif%}
+      {% if clinic.id == 2 %}
+      <img src="{% static 'img\modical.jpg' %}" class="bd-placeholder-img rounded-circle" width="250" height="230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/> 
+      {%endif%}
+      {% if clinic.id == 3 %}
+      <img src="{% static 'img\Psychology.jpg' %}" class="bd-placeholder-img rounded-circle" width="250" height="230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/> 
+      {%endif%}
+    <h2 class="fw-normal"> {{clinic.clinic_name }} </h2>
+    <p>{{clinic.clinic_details}}</p>
     <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
     </div><!-- /.col-lg-4 -->
-    <div class="col-lg-4">
-    <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-    <h2 class="fw-normal">Heading</h2>
-    <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-    </div><!-- /.col-lg-4 -->
-    <div class="col-lg-4">
-    <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-    <h2 class="fw-normal">Heading</h2>
-    <p>And lastly this, the third column of representative placeholder content.</p>
-    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-    </div><!-- /.col-lg-4 -->
+    {% endfor %}
+    
 </div><!-- /.row -->
 
 <!-- START THE FEATURETTES -->
 
 <hr class="featurette-divider">
-
-<div class="row featurette">
-    <div class="col-md-7">
-    <h2 class="featurette-heading fw-normal lh-1">First featurette heading. <span class="text-body-secondary">It’ll blow your mind.</span></h2>
-    <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+{% for clinic in clinics %}
+  {% if clinic.id == 1 %}
+    <div class="row featurette">
+        <div class="col-md-7">
+        <h2 class="featurette-heading fw-normal lh-1">Our {{clinic.clinic_name }} <span class="text-body-secondary">It helps you in all of the {{clinic.clinic_specialty}} things</span></h2>
+        <p class="lead"> {{clinic.clinic_details}} </p>
+        </div>
+        <div class="col-md-5">
+            
+        <img src="{% static 'img\dintal.jpg' %}"  class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500"  role="img"  aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%"  fill="var(--bs-secondary-bg)"/> 
+        </div>
     </div>
-    <div class="col-md-5">
-        
-    <svg   class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img"  aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%"  fill="var(--bs-secondary-bg)"/><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text>  </svg>
-    </div>
-</div>
-
-<hr class="featurette-divider">
-
-<div class="row featurette">
-    <div class="col-md-7 order-md-2">
-    <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it's that good. <span class="text-body-secondary">See for yourself.</span></h2>
-    <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
-    </div>
-    <div class="col-md-5 order-md-1">
-    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"/><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
-    </div>
-</div>
-
-<hr class="featurette-divider">
-
-<div class="row featurette">
-    <div class="col-md-7">
-    <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span class="text-body-secondary">Checkmate.</span></h2>
-    <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
-    </div>
-    <div class="col-md-5">
-    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"/><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
-    </div>
-</div>
-
-<hr class="featurette-divider">
-
+    <hr class="featurette-divider">
+    {%endif%}
+    {% if clinic.id == 2 %}
+      <div class="row featurette">
+          <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading fw-normal lh-1">Our {{clinic.clinic_name }} <span class="text-body-secondary">It helps you in all of the {{clinic.clinic_specialty}} things.</span></h2>
+          <p class="lead">{{clinic.clinic_details}}</p>
+          </div>
+          <div class="col-md-5 order-md-1">
+          <img src="{% static 'img\modical.jpg' %}" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500"  role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"/>
+          </div>
+      </div>
+      <hr class="featurette-divider">
+      {%endif%}
+      {% if clinic.id == 3 %}
+        <div class="row featurette">
+            <div class="col-md-7">
+            <h2 class="featurette-heading fw-normal lh-1">Our {{clinic.clinic_name }}. <span class="text-body-secondary">It helps you in all of the {{clinic.clinic_specialty}} things.</span></h2>
+            <p class="lead">{{clinic.clinic_details}}</p>
+            </div>
+            <div class="col-md-5">
+              <img src="{% static 'img\Psychology.jpg' %}"  class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500"  role="img"  aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%"  fill="var(--bs-secondary-bg)"/> 
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        {%endif%}
+      
+    
+  
+{%endfor%}
 <!-- /END THE FEATURETTES -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table class="table align-middle mb-0 bg-white">
-    <thead class="bg-light">
-      <tr>
-        <th>Name</th>
-        <th>Title</th>
-        <th>Status</th>
-        <th>Position</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <div class="d-flex align-items-center">
-            <img
-                src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                alt=""
-                style="width: 45px; height: 45px"
-                class="rounded-circle"
-                />
-            <div class="ms-3">
-              <p class="fw-bold mb-1">John Doe</p>
-              <p class="text-muted mb-0">john.doe@gmail.com</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">Software engineer</p>
-          <p class="text-muted mb-0">IT department</p>
-        </td>
-        <td>
-          <span class="badge badge-success rounded-pill d-inline">Active</span>
-        </td>
-        <td>Senior</td>
-        <td>
-          <button type="button" class="btn btn-link btn-sm btn-rounded">
-            Edit
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="d-flex align-items-center">
-            <img
-                src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                class="rounded-circle"
-                alt=""
-                style="width: 45px; height: 45px"
-                />
-            <div class="ms-3">
-              <p class="fw-bold mb-1">Alex Ray</p>
-              <p class="text-muted mb-0">alex.ray@gmail.com</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">Consultant</p>
-          <p class="text-muted mb-0">Finance</p>
-        </td>
-        <td>
-          <span class="badge badge-primary rounded-pill d-inline"
-                >Onboarding</span
-            >
-        </td>
-        <td>Junior</td>
-        <td>
-          <button
-                  type="button"
-                  class="btn btn-link btn-rounded btn-sm fw-bold"
-                  data-mdb-ripple-color="dark"
-                  >
-            Edit
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="d-flex align-items-center">
-            <img
-                src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                class="rounded-circle"
-                alt=""
-                style="width: 45px; height: 45px"
-                />
-            <div class="ms-3">
-              <p class="fw-bold mb-1">Kate Hunington</p>
-              <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">Designer</p>
-          <p class="text-muted mb-0">UI/UX</p>
-        </td>
-        <td>
-          <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-        </td>
-        <td>Senior</td>
-        <td>
-          <button
-                  type="button"
-                  class="btn btn-link btn-rounded btn-sm fw-bold"
-                  data-mdb-ripple-color="dark"
-                  >
-            Edit
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-
-
-
-
-
-
 
 
 

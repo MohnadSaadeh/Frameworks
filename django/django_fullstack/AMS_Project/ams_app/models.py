@@ -1,5 +1,7 @@
 from django.db import models
+from datetime import datetime
 import re
+import datetime
 # Create your models here.
 
 #--------------------------------------------------------------------ADMIN-----------------------
@@ -167,16 +169,15 @@ def create_a_pacient(first_name,last_name,phone_number, identity_number, pacient
 class AppointmentManager(models.Manager):
     def appointment_validator(self, postData):
         errors = {}
-        if len(postData['appointment_date']) < 2:
-            errors['appointment_date'] = "Date should be at least 2 characters"
         if len(postData['appointment_details']) < 5:
             errors['appointment_details'] = "Details should be at least 5 characters"
+        if postData['clinic_name'] == "- Select Clinic -"   :
+            errors['clinic_name'] = "You should be choose a Clinic"
         return errors
 
 class Appointment(models.Model):
     appointment_date = models.DateTimeField()
     appointment_details = models.TextField()
-    doctor = models.ForeignKey(Doctor, related_name="appointments", on_delete = models.CASCADE)
     pacient = models.ForeignKey(Pacient, related_name="appointments", on_delete = models.CASCADE)
     clinic = models.ForeignKey(Clinic, related_name="appointments", on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -185,5 +186,18 @@ class Appointment(models.Model):
 
     def __str__(self):
         return self.appointment_date
+
+def create_an_appointment(appointment_date, appointment_details, pacient_id, clinic_name):
+    clinic_id = Clinic.objects.get(id=Clinic.objects.get(clinic_name=clinic_name).id)
+    appointment = Appointment.objects.create(appointment_date=appointment_date,
+    appointment_details=appointment_details,
+    pacient=(Pacient.objects.get(id=pacient_id) ),
+    clinic= clinic_id )
+    return appointment
+
+
+def get_today_appointments():
+    return Appointment.objects.filter(appointment_date__date=datetime.date.today())
+
 
 #--------------------------------------------------------------------APOINTMENTS-----------------------

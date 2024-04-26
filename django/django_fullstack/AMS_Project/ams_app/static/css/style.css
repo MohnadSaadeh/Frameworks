@@ -172,5 +172,34 @@ display: block !important;
     color: red;
 }
 .message_success {
-    color: green;
+    background-color: rgb(179, 255, 179);
+    color: rgb(0, 94, 0);
+    border: 2px solid rgb(140, 240, 97);
+    border-radius: 5px;
+}
+
+
+/* Add your CSS styles here */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+h2 {
+    color: #007bff;
+} 
+h5 {
+    margin-left: 30px;
 }

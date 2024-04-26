@@ -2,17 +2,37 @@ from django.shortcuts import render , redirect
 from . import models
 from django.contrib import messages
 import bcrypt
+from datetime import datetime
 
 # Create your views here.
 def index(request): # the main page for all
     if 'admin_id' in request.session:
         return redirect('/dashboard')
-    return render(request, 'index.html')
+    else:
+        clinics = models.Clinic.objects.all()
+        context = {
+            'clinics': clinics
+        }   
+        return render(request, 'index.html' , context)
 
 def dashboard(request): #the page only for the ADMIN
     if 'admin_id' not in request.session:
         return redirect('/')
-    return render(request, 'dashboard.html')
+    else:
+        clinics = models.Clinic.objects.all()
+        apointments = models.Appointment.objects.all()
+        pacients = models.Pacient.objects.all()
+        doctors = models.Doctor.objects.all()
+        today_appointments = models.get_today_appointments()
+        context = {
+            'clinics': clinics ,
+            'apointments' : apointments,
+            'pacients' : pacients,
+            'doctors' : doctors,
+            'today_appointments' : today_appointments,
+
+        }
+        return render(request, 'dashboard.html' , context)
 
 def register(request): # to register as Admin
     return render(request, 'admin_register.html')
@@ -42,7 +62,34 @@ def add_pacient_page(request):
         return redirect('/')
     return render(request, 'add_pacient.html')
 
+def pacients_page(request):
+    if 'admin_id' not in request.session:
+        return redirect('/')
+    else:
+        pacients = models.Pacient.objects.all()
+        context = {
+            'pacients': pacients
+        }
+        return render(request, 'pacients.html',context)
 
+def appointment(request, id):
+    if 'admin_id' not in request.session:
+        return redirect('/')
+    else:
+        pacient = models.Pacient.objects.get(id=id)
+        clinics = models.Clinic.objects.all()
+        
+        context = {
+            'pacient': pacient,
+            'clinics': clinics,
+            
+        }
+        return render(request, 'apointment.html', context)
+
+
+
+def aboutus(request):
+    return render(request, 'aboutus.html')
 
 # --------------------------------------------------------------------
 
@@ -121,7 +168,7 @@ def add_pacient(request):
     errors = models.Pacient.objects.pacient_validator(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
-            messages.error(request.value )
+            messages.error(request, value)
         return redirect('/add_pacient_page')
     else:
         pacient_first_name = request.POST['added_first_name']
@@ -130,5 +177,30 @@ def add_pacient(request):
         pacient_identity_number = request.POST['added_identity_number']
         pacient_details = request.POST['added_details']
         pacient = models.create_a_pacient(first_name=pacient_first_name,last_name=pacient_last_name,phone_number=patient_phone_number,identity_number=pacient_identity_number,pacient_details=pacient_details)
-        messages.success(request, "You have successfully added a pacient!")
+        messages.success(request, "Successfully Added !" , extra_tags='pacient_added')
         return redirect('/add_pacient_page')
+
+def add_appointment(request, id):
+    errors = models.Appointment.objects.appointment_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect(f'/appointment/{id}')
+    else:
+        datetime_object = datetime.strptime(request.POST['appointment_date'], '%Y-%m-%dT%H:%M')
+        if datetime_object < datetime.now():
+            messages.error(request, "You can't add an appointment in the past" ,extra_tags='wrong_date')
+            return redirect(f'/appointment/{id}')
+        selected_appointment = request.POST['appointment_date']
+        appointment_details = request.POST['appointment_details']
+        pacient_id = id
+        clinic_name = request.POST['clinic_name']
+        apointment = models.create_an_appointment(appointment_date = selected_appointment , appointment_details=appointment_details, pacient_id=pacient_id, clinic_name=clinic_name)
+        messages.success(request, "Successfully Added !", extra_tags='appointment_added')
+        return redirect(f'/appointment/{id}')
+
+def delete_appointment(request, id):
+    appointment = models.Appointment.objects.get(id=id)
+    appointment.delete()
+    return redirect('/dashboard')
+
