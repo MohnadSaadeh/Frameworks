@@ -30,17 +30,12 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="/">Home</a>
+                    <a class="btn btn-outline-secondary" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/pacients_page">Our Pacients</a>
+                    <a class="btn btn-outline-secondary" href="/pacients_page">Our Pacients</a>
                     </li>
-                    <li class="nav-item">
-                    <a class="nav-link " href="#" >Our Clinics</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="#" >All Doctors</a>
-                    </li>
+                    
                 </ul>
             <div class="login_admin" >
                 <h5><a href="/logout"> Log Out </a></h5>
@@ -48,10 +43,6 @@
                 
             </div>
             
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
             </div>
         </div>
         </nav>
@@ -102,8 +93,9 @@
                                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                     
                                     <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                        <p>{{appointments.appointment_date}}</p>
-                                        <input    name="appointment_date" type="datetime-local" id="form3Example1c" class="form-control" value="{{appointments.appointment_date}}" />
+                                        
+                                        <input    name="appointment_date" type="datetime-local" id="form3Example1c" class="form-control" min="{{ min_datetime }}"
+                                        max="{{ max_datetime }}" value="{{appointments_date}}" />
                                         <label class="form-label" for="form3Example1c">Appointment Date</label>
                                     </div>
                                     
@@ -118,7 +110,7 @@
                                 {% if messages %}
                                 <ul class="messages">    
                                     {% for message in messages %}    
-                                        {% if message.extra_tags == 'appointment_added' %}
+                                        {% if message.extra_tags == 'appointment_updated' %}
                                         <li class="message_success" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
                                         {% else %}
                                         <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    

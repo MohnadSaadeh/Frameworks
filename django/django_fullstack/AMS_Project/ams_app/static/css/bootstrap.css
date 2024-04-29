@@ -2407,7 +2407,7 @@ textarea.form-control-lg {
   background-size: contain;
   border: var(--bs-border-width) solid var(--bs-border-color);
   -webkit-print-color-adjust: exact;
-  color-adjust: exact;
+  
   print-color-adjust: exact;
 }
 .form-check-input[type=checkbox] {
@@ -3999,8 +3999,8 @@ textarea.form-control-lg {
   text-decoration: none;
   white-space: nowrap;
   color: cyan;
-  font-weight: 900;
-  font-size: xx-large
+  font-weight: 700;
+  
 }
 .navbar-brand:hover, .navbar-brand:focus {
   color: var(--bs-navbar-brand-hover-color);
@@ -6030,17 +6030,20 @@ textarea.form-control-lg {
 }
 
 .carousel-inner {
+  
   position: relative;
   width: 100%;
   overflow: hidden;
 }
 .carousel-inner::after {
+  
   display: block;
   clear: both;
   content: "";
 }
 
 .carousel-item {
+  
   position: relative;
   display: none;
   float: left;

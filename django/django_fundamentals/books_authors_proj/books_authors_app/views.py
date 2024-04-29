@@ -2,13 +2,19 @@ from django.shortcuts import render ,redirect
 from . import models
 from django.contrib import messages
 
+from django.http import JsonResponse
+
 # Create your views here.
 def home(request):
     all_books = models.Desplay_Books()
     context = {
-        "all_books" : all_books
+        "all_books" : all_books ,
+        
+        
     }
     return render(request, 'index.html' , context)
+
+
 
 #desplays all the authors
 def authors_page(request):
@@ -21,18 +27,19 @@ def authors_page(request):
 
 # this method for adding a book to database
 def get_the_book(request):
-    errors = models.Book.objects.basic_validator(request.POST)
-    if len(errors) > 0:
-        for key, value in errors.items():
-            messages.error(request, value)
-        # redirect the user back to the form to fix the errors
-        return redirect('/')
-    else:
-        book_title = request.POST['book_title']
-        book_description = request.POST['book_description']
-        models.create_a_book(book_title,book_description)
-        messages.success(request, "Blog successfully updated")
-        return redirect('/')
+    if request.method == 'POST':
+        errors = models.Book.objects.basic_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            # redirect the user back to the form to fix the errors
+            return redirect('/')
+        else:
+            book_title = request.POST['book_title']
+            book_description = request.POST['book_description']
+            models.create_a_book(book_title,book_description)
+            messages.success(request, "Blog successfully updated")
+            return redirect('/')
 # method to view a spcifc book by its id
 
 def get_the_author(request):
@@ -87,3 +94,7 @@ def add_book_to_autho(request ,id ): #get
     the_author_id = id
     models.add_book_to_author(the_book , the_author_id )
     return redirect(f'/view_author/{id}') 
+
+def delete_book(request, id):
+    models.delete_book(id)
+    return redirect('/')

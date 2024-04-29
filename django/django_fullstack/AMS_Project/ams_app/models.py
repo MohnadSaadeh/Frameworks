@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 import re
 import datetime
+
 # Create your models here.
 
 #--------------------------------------------------------------------ADMIN-----------------------
@@ -163,14 +164,25 @@ def create_a_pacient(first_name,last_name,phone_number, identity_number, pacient
 
 #--------------------------------------------------------------------PATIENT-----------------------
 
-
+# if not EMAIL_REGEX.match(postData['admin_email']):
+#             errors['admin_email'] = "Invalid email address!"
 #--------------------------------------------------------------------APOINTMENTS-----------------------
 
 class AppointmentManager(models.Manager):
     def appointment_validator(self, postData):
+        # datetime_object = datetime.strptime(postData['appointment_date'], '%Y-%m-%dT%H:%M')
+        # DATE_REGEX = re.compile(r'^(?:202\d-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])T(?:8|9|10|11|12|13|14|15|16):[0-5]\d)$')
+        # (?:202\d-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01]): Matches the date part in the format YYYY-MM-DD.
+        # T: Matches the literal 'T' character which separates the date and time parts.
+        # (?:09|1[0-5]): Matches the hour part between 09 and 15.
+        # :[0-5]\d: Matches the minutes part (00 to 59).
+        # $: Asserts the end of the string.
+        DATE_REGEX = re.compile(r'^(?:202\d-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])T(?:09|1[0-5]):[0-5]\d)$')
         errors = {}
         if len(postData['appointment_details']) < 5:
             errors['appointment_details'] = "Details should be at least 5 characters"
+        if not DATE_REGEX.match(postData['appointment_date']):
+            errors['appointment_date'] = "You Have to chose whith the working Hours"
         if postData['clinic_name'] == "- Select Clinic -"   :
             errors['clinic_name'] = "You should be choose a Clinic"
         return errors
@@ -200,4 +212,49 @@ def get_today_appointments():
     return Appointment.objects.filter(appointment_date__date=datetime.date.today())
 
 
-#--------------------------------------------------------------------APOINTMENTS-----------------------
+
+def update_an_appointment(id, appointment_date, appointment_details, clinic_name):
+    clinic_id = Clinic.objects.get(id=Clinic.objects.get(clinic_name=clinic_name).id)
+    appointment = Appointment.objects.get(id=id)
+    appointment.appointment_date = appointment_date
+    appointment.appointment_details = appointment_details
+    appointment.clinic = clinic_id
+    appointment.save()
+    return appointment
+
+
+
+#--------------------------------------------------------------------APOINTMENTS----------------------- 
+
+
+#--------------------------------------------------------------------WORKING OURS----------------------- 
+
+def date_time_min():
+    working_hours_start = "09:00"
+    min_datetime = datetime.datetime.combine(datetime.date.today(), datetime.datetime.strptime(working_hours_start, "%H:%M").time())
+    return min_datetime
+
+def date_time_max():
+    working_hours_end = "17:00"
+    add_one_week = datetime.timedelta(days=7)
+    max_datetime = datetime.datetime.combine(datetime.date.today(), datetime.datetime.strptime(working_hours_end, "%H:%M").time())+add_one_week
+    return max_datetime
+
+
+# def get_all_avalable_dates():
+#     # # Get all existing datetime values from the database
+#     # Get the start date (today)
+#     start_date = datetime.now().date()
+
+#     # Get the end date (today + 7 days)
+#     end_date = start_date + timedelta(days=7)
+
+#     # Get all existing datetime values from the database within the date range
+#     existing_datetimes = Appointment.objects.filter(appointment_date__range=(start_date, end_date)).values_list('appointment_date', flat=True)
+
+#     # Generate all dates within the date range (today to today + 7 days)
+#     all_dates = [start_date + timedelta(days=i) for i in range(8)]
+
+#     # Exclude dates that already exist in the database
+#     available_dates = [date for date in all_dates if date not in existing_datetimes]
+#     return available_dates

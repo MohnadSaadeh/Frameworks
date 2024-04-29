@@ -84,6 +84,9 @@ def get_auther_books(id):
     the_books = the_author.books.all()
     return the_books
 
+def delete_book(id):
+    a_book = Book.objects.get(id=id)
+    return a_book.delete()
 
 
 

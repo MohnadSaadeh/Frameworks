@@ -28,8 +28,15 @@ urlpatterns = [
     #path('delete_pacient/<int:id>', views.delete_pacient),
     path('deleteappointment/<int:id>', views.delete_appointment),
 
-    # path('edit_appointment/<int:id>', views.edit_appointment),
-    # path('update_appointment/<int:id>', views.update_appointment)
+    path('edit_appointment/<int:id>', views.edit_appointment),
+    path('update_appointment/<int:id>', views.update_appointment),
+
+
+    path('searchpage', views.search),
+    path('search', views.search_results , name='search'),# ajax
+
+    path('clinicpage/<int:id>', views.clinicpage),
+    path('report_page/<int:id>/<int:pacient_id>', views.reportpage),
 
 
     ]
